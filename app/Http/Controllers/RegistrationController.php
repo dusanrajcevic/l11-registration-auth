@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class RegistrationController extends Controller
 {
     /**
      * Show the registration form.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('pages.register');
     }
 
     /**
