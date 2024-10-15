@@ -17,7 +17,7 @@ class RegistrationControllerTest extends TestCase
      */
     public function test_registration_form_contains_all_the_fields(): void
     {
-        $response = $this->get('/register');
+        $response = $this->get(action([RegistrationController::class, 'index']));
 
         $response->assertStatus(200);
         $response->assertSeeHtml('<form action="' . action([RegistrationController::class, 'store']) . '" method="post"');
@@ -31,7 +31,7 @@ class RegistrationControllerTest extends TestCase
 
     public function test_register_successfully_redirects_to_login_form(): void
     {
-        $this->get('/register')->assertStatus(200);
+        $this->get(action([RegistrationController::class, 'index']))->assertStatus(200);
 
         $data = [
             'username' => 'test',
@@ -41,7 +41,7 @@ class RegistrationControllerTest extends TestCase
             'agreement' => '1',
         ];
 
-        $response = $this->post('/register', $data);
+        $response = $this->post(action([RegistrationController::class, 'store']), $data);
 
         $user = User::where('email', $data['email'])->first();
 
@@ -55,7 +55,7 @@ class RegistrationControllerTest extends TestCase
 
     public function test_register_fails_redirects_back(): void
     {
-        $this->get('/register')->assertStatus(200);
+        $this->get(action([RegistrationController::class, 'index']))->assertStatus(200);
 
         $data = [
             'username' => '',
@@ -65,7 +65,7 @@ class RegistrationControllerTest extends TestCase
             'agreement' => '1',
         ];
 
-        $response = $this->post('/register', $data);
+        $response = $this->post(action([RegistrationController::class, 'store']), $data);
 
         $user = User::where('email', $data['email'])->first();
 
