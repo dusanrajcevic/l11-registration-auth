@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\RegistrationRequest;
+use App\Services\RegistrationServiceContract;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class RegistrationController extends Controller
 {
+    public function __construct(
+        private readonly RegistrationServiceContract $service
+    ) {
+    }
+
     /**
      * Show the registration form.
      */
@@ -16,10 +23,14 @@ class RegistrationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Register the user and redirect it to the login form.
      */
-    public function store(Request $request)
+    public function store(RegistrationRequest $request): RedirectResponse
     {
-        //
+        $this->service->register($request->validated());
+
+        return redirect()
+            ->action([AuthController::class, 'index'])
+            ->with(['success' => __('registration.success')]);
     }
 }
