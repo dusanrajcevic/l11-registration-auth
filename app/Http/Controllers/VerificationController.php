@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
@@ -20,5 +21,12 @@ class VerificationController extends Controller
         return redirect()
             ->route('home')
             ->with('message', __('registration.verification.success'));
+    }
+
+    public function resend(Request $request): RedirectResponse
+    {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('message', __('registration.verification.resent'));
     }
 }

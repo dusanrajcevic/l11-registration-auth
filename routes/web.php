@@ -17,6 +17,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['signed', 'unverified'])
         ->name('verification.verify');
 
+    Route::post('/email/verification-notification', [\App\Http\Controllers\VerificationController::class, 'resend'])
+        ->middleware(['throttle:2,1', 'unverified'])
+        ->name('verification.send');
+
     Route::get('home', fn() => 'Logged in and verified')
         ->middleware(['verified'])
         ->name('home');
