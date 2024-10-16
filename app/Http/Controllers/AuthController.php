@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AuthController extends Controller
 {
     /**
      * Show the login form.
      */
-    public function index()
+    public function index(): View
     {
-        // TODO
+        return view('auth.login');
     }
 }
