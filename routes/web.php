@@ -13,6 +13,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware('unverified')
         ->name('verification.notice');
 
+    Route::get('/email/verify/{id}/{hash}', [\App\Http\Controllers\VerificationController::class, 'verify'])
+        ->middleware(['signed', 'unverified'])
+        ->name('verification.verify');
+
     Route::get('home', fn() => 'Logged in and verified')
         ->middleware(['verified'])
         ->name('home');
