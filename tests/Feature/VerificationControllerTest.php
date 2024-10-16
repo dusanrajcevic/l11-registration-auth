@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
 class VerificationControllerTest extends TestCase
@@ -33,5 +34,44 @@ class VerificationControllerTest extends TestCase
         $response = $this->get(route('verification.notice'));
 
         $response->assertRedirect(route('login'));
+    }
+
+    public function test_verifies_email_and_redirects_to_home(): void
+    {
+        $user = User::factory()->unverified()->create();
+
+        $response = $this->actingAs($user)->get($this->verificationUrl($user));
+
+        $this->assertTrue($user->fresh()->hasVerifiedEmail());
+        $response->assertRedirect(route('home'));
+        $response->assertSessionHas('message', __('registration.verification.success'));
+    }
+
+    public function test_does_not_verify_if_not_authenticated(): void
+    {
+        $user = User::factory()->unverified()->create();
+
+        $response = $this->get($this->verificationUrl($user));
+
+        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+        $response->assertRedirect();
+    }
+
+    public function test_does_not_verify_if_verified(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get($this->verificationUrl($user));
+
+        $response->assertRedirect(route('home'));
+        $response->assertSessionMissing('message');
+    }
+
+    private function verificationURL(User $user): string
+    {
+        return URL::signedRoute(
+            'verification.verify',
+            ['id' => $user->id, 'hash' => sha1($user->email)]
+        );
     }
 }
