@@ -23,7 +23,15 @@ class LoginRequest extends FormRequest
     {
         return [
             'login' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'remember' => 'nullable'
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'remember' => (bool) $this->input('remember', false),
+        ]);
     }
 }
