@@ -36,8 +36,8 @@ class RegistrationControllerTest extends TestCase
         $data = [
             'username' => 'test',
             'email' => 'test@test.com',
-            'password' => 'Password123',
-            'password_confirmation' => 'Password123',
+            'password' => 'T3P21e.Sn',
+            'password_confirmation' => 'T3P21e.Sn',
             'agreement' => '1',
         ];
 
