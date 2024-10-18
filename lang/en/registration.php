@@ -24,5 +24,6 @@ return [
         ],
         'agreement' => 'Agree',
         'register' => 'Register',
-    ]
+    ],
+    'login' => 'Open login page'
 ];

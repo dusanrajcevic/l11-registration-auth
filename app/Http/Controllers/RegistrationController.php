@@ -19,7 +19,7 @@ class RegistrationController extends Controller
      */
     public function index(): View
     {
-        return view('pages.register');
+        return view('auth.register');
     }
 
     /**

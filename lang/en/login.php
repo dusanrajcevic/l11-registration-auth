@@ -17,4 +17,5 @@ return [
         'remember' => 'Remember me',
     ],
     'login' => 'Login',
+    'registration' => 'Open registration page'
 ];

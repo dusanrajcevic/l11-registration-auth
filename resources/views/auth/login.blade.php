@@ -3,25 +3,27 @@
 @section('title', __('login.title'))
 
 @section('main')
-    <form action="{{ route('authenticate') }}" method="post">
+    <x-form action="{{ route('authenticate') }}" method="post">
         @csrf
-        <h1>{{ __('login.title') }}</h1>
-        <div>
-            <label for="login">{{ __('login.fields.login') }}</label>
-            <input type="text" name="login" required id="login">
-        </div>
-        <div>
-            <label for="password">{{ __('login.fields.password') }}</label>
-            <input type="password" name="password" required id="password">
-        </div>
-
-        <div>
-            <label for="remember">{{ __('login.fields.remember') }}</label>
-            <input type="checkbox" name="remember" value="1" id="remember">
-        </div>
-
+        <x-h1>{{ __('login.title') }}</x-h1>
+        <x-input :label="__('login.fields.login')"
+                 type="text"
+                 name="login"
+                 :required="true"
+                 id="login" />
+        <x-input :label="__('login.fields.password')"
+                 type="password"
+                 name="password"
+                 :required="true"
+                 id="password" />
+        <x-checkbox :label="__('login.fields.remember')"
+                 type="checkbox"
+                 name="remember"
+                 value="1"
+                 :required="false"
+                 id="remember" />
         <x-errors :errors="$errors" />
-
-        <button type="submit">{{ __('login.login') }}</button>
-    </form>
+        <x-button type="submit">{{ __('login.login') }}</x-button>
+        <x-a :href="action([\App\Http\Controllers\RegistrationController::class, 'index'])">{{  __('login.registration') }}</x-a>
+    </x-form>
 @endsection
