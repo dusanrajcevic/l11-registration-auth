@@ -59,12 +59,23 @@ php artisan key:generate
 npm run install
 npm run build
 ```
-5. Run the development server:
+5. Create the database cozymeal in MySQL
+6. Change connection parameters in .env file accordingly
+7. Run migrations with seeders:
+```bash
+php artisan migrate --seed
+```
+8. Run the development server:
 ```bash
 php artisan serve
 ```
-6. Open the URL you see in the browser (for example http://localhost:8000)
+9. Open the URL you see in the browser (for example http://localhost:8000)
 
+## Testing
+You can run the test suite with the command:
+```bash
+php artisan test
+```
 ----------
 ## Answer - security
 Registration form implements basic security measures such as rate limiting on form submissions, CSRF protection, data validation on the server side, protection against SQL injection by using Laravel's Eloquent User model to store data, and hashing passwords in the database. System also makes sure users are verified by clicking on a link sent to their e-mail before they are given access to the system.
@@ -74,6 +85,8 @@ We could add a few more layers of protection such as implementing ReCAPTCHA to p
 Additionally, we would aim to offer users to authenticate and register via OAuth providers such as Google, Facebook, Linkedin, X, etc. by using Socialite, a first-party package from Laravel. All of these providers already have their own means of user verification, so reliance on their knowledge can potentially decrease the number of bot users to the minimum.
 
 To go one step further, we would ask users to provide proof of their identity with an ID document and a real time photo taken by the device's camera that could be verified using services such as Checkin, BlueCheck or iDenfy that use AI to compare them automatically.
+
+For increased authentication security, 2FA should also be implemented.
 
 ---
 
