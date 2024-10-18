@@ -34,12 +34,16 @@ The app is built with TDD approach in mind, using PhpUnit as a testing framework
 
 Directory structure and class autodiscovery hasn't been changed from the default one coming with Laravel.
 
-No external packages have been used.
+Tailwind CSS is used for styling.
+
+No other external packages have been used.
 
 ### Deployment
 #### System requirements
 
-Since the project is built on top of Laravel 11 framework, all requirements can be found in the official Laravel's [documentation](https://laravel.com/docs/11.x/deployment#server-requirements).
+Since the project is built on top of Laravel 11 framework, PHP requirements can be found in the official Laravel's [documentation](https://laravel.com/docs/11.x/deployment#server-requirements).
+
+Tailwind CSS relies on vite for compilation, so you will need Node.js >= 18 for it.
 
 #### Local installation
 
@@ -50,11 +54,16 @@ Since the project is built on top of Laravel 11 framework, all requirements can 
 cp .env.example .env
 php artisan key:generate
 ```
-4. Run the development server:
+4. To install styles run
+```bash
+npm run install
+npm run build
+```
+5. Run the development server:
 ```bash
 php artisan serve
 ```
-5. Open the URL you see in the browser (for example http://localhost:8000)
+6. Open the URL you see in the browser (for example http://localhost:8000)
 
 ----------
 ## Answer - security
