@@ -6,7 +6,12 @@ Route::resource('register', \App\Http\Controllers\RegistrationController::class)
     ->only(['index', 'store']);
 
 Route::get('login', [\App\Http\Controllers\AuthController::class, 'index'])
+    ->middleware(['guest'])
     ->name('login');
+
+Route::post('login', [\App\Http\Controllers\AuthController::class, 'store'])
+    ->middleware(['guest'])
+    ->name('authenticate');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/email/verify', [\App\Http\Controllers\VerificationController::class, 'notice'])
