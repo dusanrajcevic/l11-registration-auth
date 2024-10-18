@@ -24,5 +24,6 @@
                  id="remember" />
         <x-errors :errors="$errors" />
         <x-button type="submit">{{ __('login.login') }}</x-button>
+        <x-a :href="action([\App\Http\Controllers\RegistrationController::class, 'index'])">{{  __('login.registration') }}</x-a>
     </x-form>
 @endsection

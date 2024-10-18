@@ -1,6 +1,6 @@
 @props(['errors'])
 @if ($errors->any())
-    <ul>
+    <ul class="text-center relative">
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>
         @endforeach

@@ -35,5 +35,6 @@
         <x-errors :errors="$errors" />
 
         <x-button type="submit">{{ __('registration.register.register') }}</x-button>
+        <x-a :href="route('login')">{{  __('registration.login') }}</x-a>
     </x-form>
 @endsection
